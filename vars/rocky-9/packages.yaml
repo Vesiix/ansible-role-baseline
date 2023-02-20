@@ -1,0 +1,6 @@
+default_packages:
+  - vim
+  - jq
+  - net-tools
+  - firewalld
+  - python3-dnf-plugin-versionlock
