@@ -1,0 +1,19 @@
+# Tasks correlated to installing SSH configurations
+
+- name: Basline | create .ssh directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/jopitz/.ssh
+    owner: jopitz
+    group: jopitz
+    mode: 700
+
+- name: Baseline | install default ssh keys
+  ansible.builtin.template:
+    src: authorized_keys.j2
+    dest: /home/jopitz/.ssh/authorized_keys
+    owner: jopitz
+    group: jopitz
+    mode: 600
+
+# TODO: Create SSH configuration file

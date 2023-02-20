@@ -1,0 +1,25 @@
+- name: Baseline | import os-specific variables
+  ansible.builtin.include_vars:
+    dir: "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}"
+    extensions:
+      - 'yml'
+      - 'yaml'
+  become: yes
+
+- name: Baseline | install baseline packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ default_packages }}"
+  become: yes
+
+- name: Baseline | install .vimrc
+  ansible.builtin.file:
+    src: .vimrc
+    dest: /home/jopitz/.vimrc
+    owner: jopitz
+    group: jopitz
+    mode: 644
+
+- name: Baseline | import ssh configuration
+  ansible.builtin.include_tasks: ssh.yaml
