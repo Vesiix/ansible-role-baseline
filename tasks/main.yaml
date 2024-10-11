@@ -14,12 +14,12 @@
   become: yes
 
 - name: Baseline | install .vimrc
-  ansible.builtin.file:
+  ansible.builtin.copy:
     src: .vimrc
     dest: /home/jopitz/.vimrc
     owner: jopitz
     group: jopitz
-    mode: 644
+    mode: 0644
 
 - name: Baseline | import ssh configuration
   ansible.builtin.include_tasks: ssh.yaml

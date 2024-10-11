@@ -6,7 +6,7 @@
     path: /home/jopitz/.ssh
     owner: jopitz
     group: jopitz
-    mode: 700
+    mode: 0700
 
 - name: Baseline | install default ssh keys
   ansible.builtin.template:
@@ -14,6 +14,6 @@
     dest: /home/jopitz/.ssh/authorized_keys
     owner: jopitz
     group: jopitz
-    mode: 600
+    mode: 0600
 
 # TODO: Create SSH configuration file

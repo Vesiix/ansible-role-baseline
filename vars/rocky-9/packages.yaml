@@ -3,4 +3,5 @@ default_packages:
   - jq
   - net-tools
   - firewalld
+  - bash-completion
   - python3-dnf-plugin-versionlock
