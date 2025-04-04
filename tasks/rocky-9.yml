@@ -1,0 +1,29 @@
+---
+- name: Baseline | install baseline packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - vim
+    - jq
+    - net-tools
+    - firewalld
+    - bash-completion
+    - dnf-automatic
+    - python3-dnf-plugin-versionlock
+  become: yes
+
+- name: Baseline | update dnf-automatic.timer
+  ansible.builtin.template:
+    src: dnf-automatic.timer.j2
+    dest: /etc/systemd/system/dnf-automatic.timer.d/override.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Baseline | enable baseline packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: enabled
+  loop:
+    dnf-automatic.timer
