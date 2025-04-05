@@ -1,23 +1,7 @@
 ---
 
 - name: Baseline import os-specific tasks
-  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}"
-  become: yes
-
-#- name: Baseline | import os-specific variables
-#  ansible.builtin.include_vars:
-#    dir: "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}"
-#    extensions:
-#      - 'yml'
-#      - 'yaml'
-#  become: yes
-#
-#- name: Baseline | install baseline packages
-#  ansible.builtin.dnf:
-#    name: "{{ item }}"
-#    state: present
-#  loop: "{{ default_packages }}"
-#  become: yes
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}.yml"
 
 - name: Baseline | install .vimrc
   ansible.builtin.copy:

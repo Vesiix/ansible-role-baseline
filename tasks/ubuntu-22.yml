@@ -1,0 +1,31 @@
+---
+
+- name: Baseline | install baseline packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  loop:
+    - vim
+    - jq
+    - net-tools
+    - bash-completion
+    - unattended-upgrades
+
+- name: Baseline | configure unattended upgrades
+  ansible.builtin.template:
+    src: "{{ item.name }}"
+    dest: "{{ item.path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  loop:
+    - name: 20auto-upgrades.j2
+      path: /etc/apt/apt.conf.d/20auto-upgrades
+    - name: 50unattended-upgrades.j2
+      path: /etc/apt/apt.conf.d/50unattended-upgrades.j2
+
+- name: Baseline | apply unattended-upgrades
+  shell: dpkg-reconfigure -f noninteractive --priority=low unattended-upgrades
+  become: yes
