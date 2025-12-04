@@ -25,7 +25,4 @@
       path: /etc/apt/apt.conf.d/20auto-upgrades
     - name: 50unattended-upgrades.j2
       path: /etc/apt/apt.conf.d/50unattended-upgrades
-
-- name: Baseline | apply unattended-upgrades
-  shell: dpkg-reconfigure -f noninteractive --priority=low unattended-upgrades
-  become: yes
+  notify: apply unattended-upgrades

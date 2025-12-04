@@ -1,0 +1,5 @@
+---
+
+- name: apply unattended-upgrades
+  command: dpkg-reconfigure -f noninteractive --priority=low unattended-upgrades
+  become: yes
